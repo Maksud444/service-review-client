@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { AuthContext } from '../../../../../Context/AuthProvider/AuthProvider';
 
 const Header = () => {
+  const { user, logOut } = useContext(AuthContext)
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(err => console.error(err))
+        toast.warn('LogOut successfully', { autoClose: 1000 })
+    }
     const menuItems = <>
     <li><Link to='/'>Home</Link></li>
 </>
@@ -27,9 +37,14 @@ const Header = () => {
       </li>
     </ul>
   </div>
-  <div className="navbar-end">
-    <Link to='/login' className="btn btn-primary">Login</Link>
-  </div>
+  <div className='ml-0 navbar-end'>
+                    <h1 className='text-2xl text-purple-700'> {user?.email && <span>Welcome: {user.email}</span>}</h1>
+                    {
+                        user?.email ?
+                            <button onClick={handleLogOut} className="btn btn-error hover:rounded-lg">logOut</button>
+                            : <Link className='btn btn-error hover:rounded-lg"' to='/login'> LogIn</Link>
+                    }
+                </div>
 </div>
         </div>
     );

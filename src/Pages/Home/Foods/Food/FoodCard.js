@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import useTitle from '../../../../Hooks/useTitle';
 
 const FoodCard = ({food}) => {
-    useTitle('FoodCard')
+    useTitle('Home')
     const {_id,img,name,price} = food;
     return (
         <div>

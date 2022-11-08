@@ -1,6 +1,7 @@
 import React from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
+import { Link } from 'react-router-dom';
 import useTitle from '../../../../Hooks/useTitle';
 
 const AllFoodCard = ({allFd}) => {
@@ -28,7 +29,9 @@ const AllFoodCard = ({allFd}) => {
                         }
                     </p>
     <div className="card-actions justify-end">
+      <Link to={`/singlefood/${_id}`}>
       <button className="btn btn-primary">view details</button>
+      </Link>
     </div>
   </div>
 </div>
