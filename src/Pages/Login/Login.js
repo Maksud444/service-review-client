@@ -3,12 +3,13 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
+import useTitle from '../../Hooks/useTitle';
 
 
 
 
 const Login = () => {
-
+     useTitle('Login');
     const { userLogin } = useContext(AuthContext)
 
     const handleLogin = event => {

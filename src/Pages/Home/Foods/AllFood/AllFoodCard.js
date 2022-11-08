@@ -1,8 +1,10 @@
 import React from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
+import useTitle from '../../../../Hooks/useTitle';
 
 const AllFoodCard = ({allFd}) => {
+    useTitle('AllFood')
     const {_id,img,name,price,description} = allFd;
     return (
         <div>

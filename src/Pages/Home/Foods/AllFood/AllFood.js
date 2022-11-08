@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import useTitle from '../../../../Hooks/useTitle';
 import AllFoodCard from './AllFoodCard';
 
 const AllFood = () => {
-
+     useTitle('AllFoods')
     const [allFoods, setAllFoods] = useState([]);
     useEffect(() =>{
         fetch('http://localhost:5000/allfood')
