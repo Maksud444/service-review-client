@@ -2,6 +2,7 @@ import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import useTitle from '../../../../Hooks/useTitle';
 import MyReview from '../../../Review/MyReview/MyReview';
+import ReviewItem from '../../../Review/ReviewItem/ReviewItem';
 
 const SingleFood = () => {
     useTitle('Single-Food')
@@ -15,7 +16,7 @@ const SingleFood = () => {
                     <p className='text-3xl text-center'>${price}</p>
                     <p>{description}</p>
                 </div>
-            <MyReview></MyReview>
+             <ReviewItem></ReviewItem>
             </div>
         </div>
     );
