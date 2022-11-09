@@ -17,7 +17,14 @@ const Header = () => {
     <li><h1 className='text-2xl text-purple-700'> {user?.email && <div className='mb-8'>
             <button className="btn btn-outline bg-emerald-200 sm:mr-10">Add Food</button>
             <Link to='/myreview'>
+            { user?.email ?
+            <>
+            
             <button className="btn btn-outline btn-primary sm:mt-8 sm:mr-10 ">My Review</button>
+            </>
+            :
+            <></>
+            }
             </Link>
         </div>}</h1></li>
 </>
@@ -47,6 +54,7 @@ const Header = () => {
                     {/* <h1 className='text-2xl text-purple-700'> {user?.email && <span><button className="btn btn-outline btn-secondary">Add Food</button> {user.email}</span>}</h1> */}
                     {
                         user?.email ?
+                         
                             <button onClick={handleLogOut} className="btn btn-error hover:rounded-lg">logOut</button>
                             : <Link className='btn btn-error hover:rounded-lg"' to='/login'> LogIn</Link>
                     }

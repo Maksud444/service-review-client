@@ -4,7 +4,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-const MyReviewRow = ({ review }) => {
+const MyReviewRow = ({ review, handleDelete }) => {
     const { _id,customer, service, email, img, message } = review;
     const [reviewService, setReviewService] = useState([])
 
@@ -14,19 +14,7 @@ const MyReviewRow = ({ review }) => {
             .then(data => setReviewService(data))
     }, [service])
 
-  const handleDelete = id =>{
-    const proceed = window.confirm('Are You sure Delete Your Review');
-
-    if(proceed){
-        fetch(`http://localhost:5000/review/${id}`,{
-            method: 'DELETE'
-        })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-        })
-    }
-  }
+ 
 
     return (
         <div className='flex justify-center'>

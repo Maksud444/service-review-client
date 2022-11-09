@@ -21,8 +21,8 @@ const FoodCard = ({food}) => {
     <h2 className="card-title">{name}</h2>
     <p className='font-bold text-xl'>${price}</p>
     <div className="card-actions justify-end">
-      <Link to='/allfood'>
-      <button className="btn btn-primary">See All</button>
+      <Link to={`/singlefood/${_id}`}>
+      <button className="btn btn-primary">View Details</button>
       </Link>
     </div>
   </div>
