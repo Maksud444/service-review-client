@@ -15,7 +15,11 @@ const Header = () => {
     const menuItems = <>
     <li><Link to='/'>Home</Link></li>
     <li><h1 className='text-2xl text-purple-700'> {user?.email && <div className='mb-8'>
-            <button className="btn btn-outline bg-emerald-200 sm:mr-10">Add Food</button>
+           
+            <Link to='/addfoods'>
+            
+            <button className="btn btn-outline bg-green-300 sm:mt-8 sm:mr-10 ">Add Foods</button>
+            </Link>
             <Link to='/myreview'>
             { user?.email ?
             <>
