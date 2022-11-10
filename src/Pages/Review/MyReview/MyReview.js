@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import MyReviewRow from './MyreviewRow';
 
@@ -38,7 +38,11 @@ const MyReview = () => {
             })
         }
       }
-      
+      const navigate = useNavigate();
+      const handleEdit = id =>{
+        navigate(`/review/edit/${id}`)
+       
+      }
 
     return (
         <div>
@@ -58,6 +62,7 @@ const MyReview = () => {
                                 key={review._id}
                                 review={review}
                                 handleDelete={handleDelete}
+                                handleEdit={handleEdit}
                             ></MyReviewRow>)
                         }
                     </tbody>

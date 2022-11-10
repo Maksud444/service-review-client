@@ -4,15 +4,15 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-const MyReviewRow = ({ review, handleDelete }) => {
-    const { _id,customer, service, email, img, message } = review;
+const MyReviewRow = ({ review, handleDelete,handleEdit }) => {
+    const { _id,customer, email, img, message } = review;
     const [reviewService, setReviewService] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/getfood/${service}`)
+        fetch(`http://localhost:5000/allfood/${review}`)
             .then(res => res.json())
             .then(data => setReviewService(data))
-    }, [service])
+    }, [review])
 
  
 
@@ -44,7 +44,7 @@ const MyReviewRow = ({ review, handleDelete }) => {
                 </td>
             
                 <th>
-                    <button className="btn btn-ghost btn-xs">Edit</button>
+                    <button onClick={() => handleEdit(_id)} className="btn btn-ghost btn-xs">Edit</button>
                 </th>
             </tr>
         </div>

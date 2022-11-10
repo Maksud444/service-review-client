@@ -10,7 +10,7 @@ import useTitle from '../../Hooks/useTitle';
 
 const Login = () => {
      useTitle('Login');
-    const { userLogin } = useContext(AuthContext)
+    const { userLogin, loading } = useContext(AuthContext)
 
     const handleLogin = event => {
         event.preventDefault();
@@ -29,6 +29,11 @@ const Login = () => {
                 console.error(err)
                 toast.error('password wrong', { autoClose: 1000 })
             })
+    }
+    if (loading) {
+        return <div className='flex justify-center'>
+            <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-400"></div>
+        </div>
     }
 
     return (

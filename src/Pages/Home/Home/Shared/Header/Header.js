@@ -14,6 +14,7 @@ const Header = () => {
     }
     const menuItems = <>
     <li><Link to='/'>Home</Link></li>
+    <li><Link to='/blog'>Blog</Link></li>
     <li><h1 className='text-2xl text-purple-700'> {user?.email && <div className='mb-8'>
            
             <Link to='/addfoods'>

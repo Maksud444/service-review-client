@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { useLoaderData } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import useTitle from '../../../../Hooks/useTitle';
@@ -7,6 +7,7 @@ import useTitle from '../../../../Hooks/useTitle';
 const AddFoods = () => {
     useTitle('AddFoods')
     // const { img, name, price, description, _id } = useLoaderData()
+   
     const handleForm = (e) => {
         e.preventDefault();
         const form = e.target;
