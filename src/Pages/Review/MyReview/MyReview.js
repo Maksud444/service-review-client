@@ -13,7 +13,11 @@ const MyReview = () => {
     const [reviews, setReviews] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/review?email=${user?.email}`)
+        fetch(`http://localhost:5000/review?email=${user?.email}`,{
+            headers:{
+                autuorization:`Bearer ${localStorage.getItem('food-token')}`
+            }
+        })
             .then(res => res.json())
             .then(data => setReviews(data))
     }, [user?.email]);
