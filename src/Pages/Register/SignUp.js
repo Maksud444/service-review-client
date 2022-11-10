@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { FaGoogle } from "react-icons/fa";
 import { useContext } from 'react';
@@ -12,6 +12,9 @@ import useTitle from '../../Hooks/useTitle';
 
 const SignUp = () => {
      useTitle('SignUp');
+     const location = useLocation();
+     const navigate = useNavigate();
+     const from = location.state?.from?.pathname || "/";
     const { createUser, googleLogin,loading } = useContext(AuthContext)
 
     const handleSignUp = event => {
@@ -30,6 +33,7 @@ const SignUp = () => {
             })
             .catch(err => console.error(err))
     }
+    navigate(from, { replace: true });
 
     const handleGoogleSignIn = event => {
         googleLogin()

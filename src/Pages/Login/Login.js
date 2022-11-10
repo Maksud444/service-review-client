@@ -1,98 +1,120 @@
-import React from 'react';
-import { useContext } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
-import useTitle from '../../Hooks/useTitle';
-
-
-
+import React from "react";
+import { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
+import useTitle from "../../Hooks/useTitle";
 
 const Login = () => {
-     useTitle('Login');
-     const location = useLocation();
-     const navigate = useNavigate();
-     const from = location.state?.from?.pathname || '/';
-    const { userLogin, loading } = useContext(AuthContext)
+  useTitle("Login");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
+  const { userLogin, loading } = useContext(AuthContext);
 
-    const handleLogin = event => {
-        event.preventDefault();
-        const form = event.target;
-        const email = form.email.value;
-        const password = form.password.value;
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
 
-        userLogin(email, password)
-            .then(result => {
-                const user = result.user;
-                console.log(user)
+    userLogin(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
 
-                const currentUser = {
-                    email: user.email
-                }
-                // get jwt///
-                fetch('http://localhost:5000/jwt',{
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(currentUser)
-                })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    localStorage.setItem('food-token', data.token);
-                    navigate(from, { replace: true });
-                })
+        const currentUser = {
+          email: user.email,
+        };
+        // get jwt///
+        fetch("https://kh-organic-food-server.vercel.app/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            localStorage.setItem("food-token", data.token);
+            navigate(from, { replace: true });
+          });
 
-
-
-                toast.success('Login successFully', { autoClose: 1000 })
-                form.reset()
-            })
-            .catch(err => {
-                console.error(err)
-                toast.error('password wrong', { autoClose: 1000 })
-            })
-    }
-    if (loading) {
-        return <div className='flex justify-center'>
-            <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-400"></div>
-        </div>
-    }
-
+        toast.success("Login successFully", { autoClose: 1000 });
+        form.reset();
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error("password wrong", { autoClose: 1000 });
+      });
+  };
+  if (loading) {
     return (
-        <div className="hero w-full my-20">
-            <div className="hero-content grid md:grid-cols-2 flex-col lg:flex-row">
-                <div className="text-center lg:text-left">
-                    <img className='w-3/4' src="https://img.freepik.com/premium-vector/young-woman-sitting-crosslegged-working-laptop-girl-lotus-pose-with-notebook-creative-job-studying-concept-freelance-remote-work-online-education-cartoon-flat-vector-illustration_169241-5194.jpg?w=2000" alt="" />
-                </div>
-                <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 py-20">
-                    <h1 className="text-5xl text-center font-bold">Login</h1>
-                    <form onSubmit={handleLogin} className="card-body">
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Email</span>
-                            </label>
-                            <input type="text" name='email' placeholder="email" className="input input-bordered" />
-                        </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Password</span>
-                            </label>
-                            <input type="password" name='password' placeholder="password" className="input input-bordered" />
-                            <label className="label">
-                                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                            </label>
-                        </div>
-                        <div className="form-control mt-6 ">
-                            <input className="btn btn-outline btn-success rounded-lg" type="submit" value="Login" />
-                        </div>
-                    </form>
-                    <p className='text-center'>Food Service Here <Link className='text-orange-600 font-bold' to="/signup">Sign Up</Link> </p>
-                </div>
-            </div>
-        </div>
+      <div className="flex justify-center">
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-400"></div>
+      </div>
     );
+  }
+
+  return (
+    <div className="hero w-full my-20">
+      <div className="hero-content grid md:grid-cols-2 flex-col lg:flex-row">
+        <div className="text-center lg:text-left">
+          <img
+            className="w-3/4"
+            src="https://img.freepik.com/premium-vector/young-woman-sitting-crosslegged-working-laptop-girl-lotus-pose-with-notebook-creative-job-studying-concept-freelance-remote-work-online-education-cartoon-flat-vector-illustration_169241-5194.jpg?w=2000"
+            alt=""
+          />
+        </div>
+        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 py-20">
+          <h1 className="text-5xl text-center font-bold">Login</h1>
+          <form onSubmit={handleLogin} className="card-body">
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Email</span>
+              </label>
+              <input
+                type="text"
+                name="email"
+                placeholder="email"
+                className="input input-bordered"
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Password</span>
+              </label>
+              <input
+                type="password"
+                name="password"
+                placeholder="password"
+                className="input input-bordered"
+              />
+              <label className="label">
+                <a href="#" className="label-text-alt link link-hover">
+                  Forgot password?
+                </a>
+              </label>
+            </div>
+            <div className="form-control mt-6 ">
+              <input
+                className="btn btn-outline btn-success rounded-lg"
+                type="submit"
+                value="Login"
+              />
+            </div>
+          </form>
+          <p className="text-center">
+            Food Service Here{" "}
+            <Link className="text-orange-600 font-bold" to="/signup">
+              Sign Up
+            </Link>{" "}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Login;
